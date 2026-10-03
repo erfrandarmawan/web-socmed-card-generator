@@ -1,0 +1,28 @@
+{
+  "name": "web-socmed-card-generator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Football goal card generator for social media (Nuxt 4 SPA)",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@fontsource/anton": "^5.1.0",
+    "@fontsource/inter": "^5.1.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "nuxt": "^4.0.0",
+    "tailwindcss": "^4.1.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vue-tsc": "^2.2.0"
+  }
+}
