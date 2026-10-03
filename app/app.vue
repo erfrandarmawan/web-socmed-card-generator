@@ -8,8 +8,7 @@
       <div
         class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 text-xs text-white/35 sm:flex-row sm:px-6 lg:px-8"
       >
-        <p>Goal Card Generator — every image is rendered locally on your device.</p>
-        <p>Built with Nuxt 4 · SPA</p>
+        <p>Generator Kartu Gol — semua gambar diproses langsung di perangkat Anda.</p>
       </div>
     </footer>
   </div>

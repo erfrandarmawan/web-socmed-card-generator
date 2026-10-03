@@ -9,11 +9,10 @@
   --color-ink-800: #0f1628;
   --color-ink-700: #182238;
 
-  --color-volt-400: #d4ff4f;
-  --color-volt-500: #c8ff2f;
-  --color-volt-600: #a6e000;
-
-  --color-cyan-glow: #2fe4ff;
+  --color-brand-400: #e23a50;
+  --color-brand-500: #b91f30;
+  --color-brand-600: #8f1725;
+  --color-brand-glow: #ff5a6e;
 }
 
 @layer base {
@@ -24,15 +23,15 @@
   body {
     @apply bg-ink-950 text-white antialiased;
     background-image:
-      radial-gradient(60rem 60rem at 15% -10%, rgba(47, 228, 255, 0.12), transparent 60%),
-      radial-gradient(55rem 55rem at 110% 15%, rgba(200, 255, 47, 0.1), transparent 55%),
-      linear-gradient(180deg, #070b15 0%, #05070d 100%);
+      radial-gradient(60rem 60rem at 15% -10%, rgba(255, 90, 110, 0.1), transparent 60%),
+      radial-gradient(55rem 55rem at 110% 15%, rgba(185, 31, 48, 0.2), transparent 55%),
+      linear-gradient(180deg, #0a0d14 0%, #05070d 100%);
     background-attachment: fixed;
     min-height: 100vh;
   }
 
   ::selection {
-    background: rgba(200, 255, 47, 0.35);
+    background: rgba(185, 31, 48, 0.45);
   }
 }
 
@@ -44,13 +43,13 @@
   .field {
     @apply w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-base text-white
       outline-none transition placeholder:text-white/30
-      focus:border-volt-500/70 focus:bg-white/[0.06] focus:ring-2 focus:ring-volt-500/20;
+      focus:border-brand-500/70 focus:bg-white/[0.06] focus:ring-2 focus:ring-brand-500/25;
   }
 
-  .btn-volt {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-volt-500 px-5 py-3 text-sm
-      font-bold uppercase tracking-wider text-ink-950 transition
-      hover:bg-volt-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-volt-400/60
+  .btn-brand {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-5 py-3 text-sm
+      font-bold uppercase tracking-wider text-white transition
+      hover:bg-brand-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/60
       disabled:cursor-not-allowed disabled:opacity-40;
   }
 

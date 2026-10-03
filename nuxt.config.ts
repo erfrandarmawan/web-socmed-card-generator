@@ -23,8 +23,8 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: { lang: 'en' },
-      title: 'Goal Card Generator',
+      htmlAttrs: { lang: 'id' },
+      title: 'Generator Kartu Gol',
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
       meta: [
         { charset: 'utf-8' },
@@ -32,7 +32,7 @@ export default defineNuxtConfig({
         {
           name: 'description',
           content:
-            'Generate downloadable goal announcement cards for social media in vertical (9:16) and square (1:1) formats.',
+            'Buat kartu pengumuman gol siap unduh untuk media sosial dalam format vertikal (9:16) dan persegi (1:1).',
         },
         { name: 'theme-color', content: '#05070d' },
       ],

@@ -47,7 +47,10 @@ const cardData = computed<CardData | null>(() => {
   return {
     playerName: selectedPlayer.value.name,
     team: selectedPlayer.value.team,
-    country: selectedPlayer.value.country,
+    country:
+      selectedPlayer.value.country === selectedPlayer.value.team
+        ? ''
+        : selectedPlayer.value.country,
     position: selectedPlayer.value.position,
     number: selectedPlayer.value.number,
     minute: minute.value,
@@ -125,19 +128,13 @@ function reset() {
 <template>
   <div class="mx-auto w-full max-w-7xl px-4 pb-20 pt-10 sm:px-6 lg:px-8">
     <header class="mb-10 max-w-3xl">
-      <span
-        class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/60"
-      >
-        <span class="h-1.5 w-1.5 rounded-full bg-volt-500" />
-        Nuxt 4 · client-side image generation
-      </span>
       <h1 class="mt-5 font-display text-4xl uppercase leading-none tracking-wide sm:text-6xl">
-        Goal Card <span class="text-volt-500">Generator</span>
+        Generator Kartu <span class="text-brand-500">Gol</span>
       </h1>
       <p class="mt-4 text-base text-white/55">
-        Create bold goal announcement cards for football fans and fanbase accounts. Choose a
-        player and match minute, then download ready-to-post images in vertical (9:16) and
-        square (1:1) formats.
+        Buat kartu pengumuman gol untuk penggemar sepak bola dan akun fanbase. Pilih
+        pemain dan menit pertandingan, lalu unduh gambar dalam format vertikal (9:16)
+        dan persegi (1:1).
       </p>
     </header>
 
@@ -145,12 +142,12 @@ function reset() {
       <section class="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6 lg:sticky lg:top-6">
         <div class="space-y-5">
           <div>
-            <label class="field-label">Player name</label>
+            <label class="field-label">Nama pemain</label>
             <PlayerCombobox v-model="selectedPlayer" :players="players" />
           </div>
 
           <div>
-            <label for="minute" class="field-label">Minute</label>
+            <label for="minute" class="field-label">Menit</label>
             <input
               id="minute"
               v-model="minuteInput"
@@ -158,7 +155,7 @@ function reset() {
               inputmode="numeric"
               min="1"
               max="120"
-              placeholder="e.g. 67"
+              placeholder="cth. 67"
               class="field"
               @blur="clampMinute"
             />
@@ -170,7 +167,7 @@ function reset() {
                 class="rounded-lg border px-3 py-1.5 text-xs font-semibold transition"
                 :class="
                   minute === value
-                    ? 'border-volt-500/70 bg-volt-500/15 text-volt-400'
+                    ? 'border-brand-500/70 bg-brand-500/20 text-brand-400'
                     : 'border-white/10 bg-white/[0.03] text-white/60 hover:border-white/25 hover:text-white'
                 "
                 @click="pickMinute(value)"
@@ -178,7 +175,7 @@ function reset() {
                 {{ value }}′
               </button>
             </div>
-            <p class="mt-2 text-xs text-white/40">Any minute from 1 to 120.</p>
+            <p class="mt-2 text-xs text-white/40">Menit berapa pun dari 1 sampai 120.</p>
           </div>
 
           <Transition
@@ -188,10 +185,10 @@ function reset() {
             leave-to-class="-translate-y-1 opacity-0"
           >
             <div v-if="isInjuryTime">
-              <label for="additional" class="field-label">Additional time (optional)</label>
+              <label for="additional" class="field-label">Tambahan waktu (opsional)</label>
               <div class="relative">
                 <span
-                  class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-display text-lg text-volt-500"
+                  class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-display text-lg text-brand-500"
                 >
                   +
                 </span>
@@ -208,21 +205,21 @@ function reset() {
                 />
               </div>
               <p class="mt-2 text-xs text-white/40">
-                Example: <span class="text-white/70">{{ minute }}′ +2</span> for stoppage time.
-                Leave empty for a plain <span class="text-white/70">{{ minute }}′</span>.
+                Contoh: <span class="text-white/70">{{ minute }}′ +2</span> untuk injury time.
+                Biarkan kosong untuk <span class="text-white/70">{{ minute }}′</span> biasa.
               </p>
             </div>
           </Transition>
 
           <div class="rounded-xl border border-white/10 bg-ink-900/60 px-4 py-3">
-            <p class="text-xs uppercase tracking-[0.2em] text-white/40">Preview minute</p>
+            <p class="text-xs uppercase tracking-[0.2em] text-white/40">Pratinjau menit</p>
             <p class="font-display text-3xl text-white">{{ timePreview }}</p>
           </div>
 
           <div class="flex flex-col gap-2 sm:flex-row">
             <button
               type="button"
-              class="btn-volt flex-1"
+              class="btn-brand flex-1"
               :disabled="!canGenerate"
               @click="generate"
             >
@@ -238,21 +235,21 @@ function reset() {
               </svg>
               <span
                 v-else
-                class="h-4 w-4 animate-spin rounded-full border-2 border-ink-950/30 border-t-ink-950"
+                class="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"
               />
-              {{ isGenerating ? 'Generating…' : 'Generate cards' }}
+              {{ isGenerating ? 'Membuat…' : 'Buat kartu' }}
             </button>
-            <button type="button" class="btn-ghost sm:w-auto" @click="reset">Reset</button>
+            <button type="button" class="btn-ghost sm:w-auto" @click="reset">Atur ulang</button>
           </div>
 
           <div v-if="isGenerating || progress > 0" class="space-y-2">
             <div class="flex items-center justify-between text-xs text-white/50">
-              <span>{{ isGenerating ? 'Rendering your cards…' : 'Done' }}</span>
+              <span>{{ isGenerating ? 'Merender kartu…' : 'Selesai' }}</span>
               <span>{{ Math.round(progress) }}%</span>
             </div>
             <div class="h-2 overflow-hidden rounded-full bg-white/10">
               <div
-                class="h-full rounded-full bg-gradient-to-r from-volt-500 to-cyan-glow transition-all duration-200 ease-out"
+                class="h-full rounded-full bg-gradient-to-r from-brand-500 to-brand-400 transition-all duration-200 ease-out"
                 :style="{ width: `${progress}%` }"
               />
             </div>
@@ -263,9 +260,9 @@ function reset() {
       <section>
         <div class="mb-4 flex items-center justify-between">
           <div>
-            <h2 class="font-display text-2xl uppercase tracking-wide">Preview &amp; download</h2>
+            <h2 class="font-display text-2xl uppercase tracking-wide">Pratinjau &amp; unduh</h2>
             <p class="text-sm text-white/45">
-              Both formats are generated in your browser. Export as PNG or WebP.
+              Kedua format dibuat di browser Anda. Ekspor sebagai PNG atau WebP.
             </p>
           </div>
         </div>

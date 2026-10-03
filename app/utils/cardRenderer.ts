@@ -23,19 +23,19 @@ export interface CardFormatConfig {
 export const CARD_FORMATS: Record<CardFormat, CardFormatConfig> = {
   vertical: {
     key: 'vertical',
-    label: 'Vertical',
+    label: 'Vertikal',
     ratio: '9:16',
     width: 1080,
     height: 1920,
-    description: 'Stories, Reels & TikTok',
+    description: 'Story, Reels & TikTok',
   },
   square: {
     key: 'square',
-    label: 'Square',
+    label: 'Persegi',
     ratio: '1:1',
     width: 1080,
     height: 1080,
-    description: 'Feed & timelines',
+    description: 'Feed & linimasa',
   },
 }
 
@@ -44,9 +44,8 @@ export const CARD_FORMAT_LIST: CardFormatConfig[] = [
   CARD_FORMATS.square,
 ]
 
-const ACCENT = '#C8FF2F'
-const ACCENT_SOFT = 'rgba(200, 255, 47, 0.12)'
-const CYAN = '#2FE4FF'
+const ACCENT = '#E23A50'
+const ACCENT_SOFT = 'rgba(226, 58, 80, 0.14)'
 const WHITE = '#FFFFFF'
 const MUTED = 'rgba(255, 255, 255, 0.58)'
 
@@ -154,8 +153,8 @@ function drawBackground(ctx: CanvasRenderingContext2D, w: number, h: number) {
     h * 0.44,
     Math.max(w, h) * 0.78,
   )
-  glow.addColorStop(0, 'rgba(47, 228, 255, 0.18)')
-  glow.addColorStop(0.42, 'rgba(200, 255, 47, 0.08)')
+  glow.addColorStop(0, 'rgba(255, 90, 110, 0.18)')
+  glow.addColorStop(0.42, 'rgba(185, 31, 48, 0.14)')
   glow.addColorStop(1, 'rgba(0, 0, 0, 0)')
   ctx.fillStyle = glow
   ctx.fillRect(0, 0, w, h)
@@ -222,7 +221,7 @@ function drawBadge(
   roundRect(ctx, x, y, pillW, layout.badgeH, layout.badgeH / 2)
   ctx.fill()
   ctx.lineWidth = 3
-  ctx.strokeStyle = 'rgba(200, 255, 47, 0.65)'
+  ctx.strokeStyle = 'rgba(226, 58, 80, 0.75)'
   ctx.stroke()
 
   ctx.beginPath()
@@ -287,9 +286,9 @@ function drawDivider(
 ) {
   const x = cx - layout.dividerW / 2
   const gradient = ctx.createLinearGradient(x, y, x + layout.dividerW, y)
-  gradient.addColorStop(0, 'rgba(200, 255, 47, 0)')
+  gradient.addColorStop(0, 'rgba(226, 58, 80, 0)')
   gradient.addColorStop(0.5, ACCENT)
-  gradient.addColorStop(1, 'rgba(47, 228, 255, 0)')
+  gradient.addColorStop(1, 'rgba(255, 90, 110, 0)')
   ctx.fillStyle = gradient
   roundRect(ctx, x, y, layout.dividerW, layout.dividerH, layout.dividerH / 2)
   ctx.fill()
@@ -318,7 +317,7 @@ export function drawCard(
   canvas.height = h
 
   const ctx = canvas.getContext('2d')
-  if (!ctx) throw new Error('Canvas 2D context is not available.')
+  if (!ctx) throw new Error('Konteks Canvas 2D tidak tersedia.')
 
   ctx.clearRect(0, 0, w, h)
   drawBackground(ctx, w, h)
@@ -395,14 +394,14 @@ export function drawCard(
     ctx.fillText(metaParts.toUpperCase(), cx, metaCenterY)
   }
 
-  drawBadge(ctx, cx, layout.badgeY, 'GOAL', layout)
+  drawBadge(ctx, cx, layout.badgeY, 'GOL', layout)
   drawCornerNumber(ctx, w, layout.badgeY, data.number, layout)
 
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
   ctx.font = `600 ${layout.metaSize * 0.8}px "Inter", system-ui, sans-serif`
   ctx.fillStyle = 'rgba(255, 255, 255, 0.22)'
-  ctx.fillText('MATCH MOMENT', cx, h - 84)
+  ctx.fillText('MOMEN PERTANDINGAN', cx, h - 84)
 }
 
 export function canExportWebp(): boolean {
@@ -426,7 +425,7 @@ export async function canvasToBlob(
     canvas.toBlob(
       (blob) => {
         if (blob) resolve(blob)
-        else reject(new Error(`Failed to export ${type.toUpperCase()} image.`))
+        else reject(new Error(`Gagal mengekspor gambar ${type.toUpperCase()}.`))
       },
       mime,
       type === 'webp' ? quality : undefined,
@@ -451,7 +450,7 @@ export function buildFileName(
   const { main, extra } = formatMinute(data.minute, data.additional)
   const minute = extra ? `${main}${extra}` : main
   const minuteSlug = minute.replace(/[^0-9+]/g, '')
-  return `goal-${slugify(data.playerName)}-${minuteSlug}min-${format}.${type}`
+  return `gol-${slugify(data.playerName)}-${minuteSlug}menit-${format}.${type}`
 }
 
 export function downloadBlob(blob: Blob, filename: string) {

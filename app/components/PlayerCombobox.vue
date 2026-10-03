@@ -94,10 +94,10 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onClickOutside))
   <div ref="root" class="relative">
     <div
       v-if="modelValue"
-      class="flex items-center gap-3 rounded-xl border border-volt-500/40 bg-volt-500/[0.07] px-3 py-2.5"
+      class="flex items-center gap-3 rounded-xl border border-brand-500/40 bg-brand-500/[0.08] px-3 py-2.5"
     >
       <span
-        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-ink-950"
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white"
         :style="{
           backgroundImage: `linear-gradient(135deg, ${avatarGradient(modelValue.id)[0]}, ${avatarGradient(modelValue.id)[1]})`,
         }"
@@ -113,7 +113,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onClickOutside))
       <button
         type="button"
         class="shrink-0 rounded-lg p-2 text-white/50 transition hover:bg-white/10 hover:text-white"
-        aria-label="Clear selected player"
+        aria-label="Hapus pemain terpilih"
         @click="clear"
       >
         <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
@@ -139,7 +139,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onClickOutside))
           v-model="query"
           type="text"
           class="field pl-10"
-          placeholder="Search player, club, or country..."
+          placeholder="Cari pemain, klub, atau negara..."
           autocomplete="off"
           role="combobox"
           :aria-expanded="open"
@@ -154,7 +154,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onClickOutside))
         class="absolute z-20 mt-2 max-h-72 w-full overflow-y-auto rounded-xl border border-white/10 bg-ink-800/95 p-1.5 shadow-2xl shadow-black/50 backdrop-blur"
       >
         <p v-if="!filtered.length" class="px-3 py-4 text-sm text-white/50">
-          No players found matching that search.
+          Pemain tidak ditemukan untuk pencarian tersebut.
         </p>
         <ul v-else id="player-listbox" role="listbox" class="space-y-0.5">
           <li
@@ -163,12 +163,12 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onClickOutside))
             role="option"
             :aria-selected="index === activeIndex"
             class="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 transition"
-            :class="index === activeIndex ? 'bg-volt-500/15' : 'hover:bg-white/[0.06]'"
+            :class="index === activeIndex ? 'bg-brand-500/20' : 'hover:bg-white/[0.06]'"
             @mouseenter="activeIndex = index"
             @mousedown.prevent="select(player)"
           >
             <span
-              class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-ink-950"
+              class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
               :style="{
                 backgroundImage: `linear-gradient(135deg, ${avatarGradient(player.id)[0]}, ${avatarGradient(player.id)[1]})`,
               }"
