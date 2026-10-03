@@ -1,10 +1,16 @@
 # Generator Kartu Gol
 
+Product Requirements Document : https://docs.google.com/document/d/1PkJPH7MAmw43BxmvkpTbcsGpiMKLNe9P2dkrVEJb2nw/edit?usp=sharing
+
 Aplikasi web untuk **membuat kartu pengumuman gol** siap unggah ke media sosial. Pengguna memilih pemain dan menit pertandingan, lalu mengunduh gambar dalam dua format: **vertikal (9:16)** untuk Story/Reels/TikTok dan **persegi (1:1)** untuk feed.
 
 Seluruh proses pengolahan gambar dijalankan **di sisi klien (browser)**, sehingga server tidak dibebani komputasi render.
 
 Dibangun dengan **Nuxt 4** (mode SPA), **Tailwind CSS 4**, **TypeScript**, dan **Canvas API**.
+
+**Virtual Machine (VM) Biznet Gio (https://biznetgio.com/)** :
+- **AFNLDEVELOBE** (kode voucher 15% produk Neo Lite, khusus pembelian baru saja)
+- **AFNLPDEVELOBE** (kode voucher 10% produk Neo Lite Pro, khusus pembelian baru saja)
 
 ---
 
@@ -149,7 +155,7 @@ Data pemain disimpan di `app/data/players.json` dengan struktur berikut:
 }
 ```
 
-Data contoh diambil dari **FIFA Player Data** (Timnas Indonesia). Struktur asli FIFA yang bersarang (array `Players`, `PlayerName`, `PositionLocalized`, dan `JerseyNum`) disederhanakan menjadi struktur di atas agar mudah dirender. Untuk memperbarui data:
+Data contoh diambil dari **FIFA Player Data** (Timnas Indonesia - https://www.fifa.com/id/tournaments/mens/asean-cup/2026/teams/indonesia/squad). Struktur asli FIFA yang bersarang (array `Players`, `PlayerName`, `PositionLocalized`, dan `JerseyNum`) disederhanakan menjadi struktur di atas agar mudah dirender. Untuk memperbarui data:
 
 1. Ambil data terbaru dari sumber FIFA.
 2. Konversi setiap pemain ke bentuk di atas (`name` dari `PlayerName[].Description`, `position` dari `PositionLocalized[].Description`, `number` dari `JerseyNum`, `id` dari `IdPlayer`).
