@@ -8,3 +8,20 @@ services:
     ports:
       - "8080:80"
     restart: unless-stopped
+
+    # Resource limits for the RUNTIME container (nginx serving static files).
+    # 100m CPU = 0.10 core, 128M memory. Honored by Docker Compose v2.
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: 128M
+    # Legacy keys (use these instead if your Docker/Compose version ignores `deploy`):
+    # cpus: "0.10"
+    # mem_limit: 128m
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
