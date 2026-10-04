@@ -1,0 +1,26 @@
+# VM / production compose file.
+# This file ONLY pulls a pre-built image from GHCR — it has no build context,
+# so it works on a VM that doesn't have the source code.
+#
+# Replace YOUR_GH_USERNAME (lowercase) with your GitHub username/org.
+# The resource limits below match 100m CPU / 128MiB memory.
+
+services:
+  web:
+    image: ghcr.io/YOUR_GH_USERNAME/web-socmed-card-generator:latest
+    container_name: web-socmed-card-generator
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: 128M
+          
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
